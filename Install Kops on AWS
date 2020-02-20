@@ -58,3 +58,4 @@ kops create cluster --zones us-east-2a ${NAME} --yes
 
 kops update cluster fleetman.k8s.local --yes
 
+kops rolling-update cluster
