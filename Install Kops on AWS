@@ -51,3 +51,16 @@ kops edit cluster ${NAME}
 export EDITOR=nano
 export EDITOR=vim
 
+kops edit ig nodes --name ${NAME}
+kops get ig --name ${NAME}
+
+kops create cluster \
+--cloud=aws \
+--zones=us-east-2a \
+--name=fleetman.k8s.local \
+--state=s3://kops-coelgber \
+--dns=private \
+--yes
+
+kops update cluster fleetman.k8s.local --yes
+
