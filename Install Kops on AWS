@@ -35,7 +35,7 @@ export AWS_SECRET_ACCESS_KEY=...
 Make sure to create bucket policy as public and enable versioning !
 
 9. Type on SSH CLI :
-export NAME=fleetman.k8s.local
+export NAME=fleetman.k8s.local  ==> remember to add the last with 'k8s.local'
 export KOPS_STATE_STORE=s3://kops-coelgber
 
 10. Check DC availability 
@@ -54,13 +54,7 @@ export EDITOR=vim
 kops edit ig nodes --name ${NAME}
 kops get ig --name ${NAME}
 
-kops create cluster \
---cloud=aws \
---zones=us-east-2a \
---name=fleetman.k8s.local \
---state=s3://kops-coelgber \
---dns=private \
---yes
+kops create cluster --zones us-east-2a ${NAME} --yes
 
 kops update cluster fleetman.k8s.local --yes
 
