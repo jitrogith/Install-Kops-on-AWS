@@ -11,6 +11,9 @@ sudo mv ./kops /usr/local/bin/
 curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
+#Check kubectl with :
+kubectl version
+#You may have only Client version without Server version because we are not create the cluster yet.
 
 5. Create User & Group for Kops with :
 - EC2FullAccess
@@ -28,6 +31,23 @@ aws configure
 export AWS_ACCESS_KEY_ID=...
 export AWS_SECRET_ACCESS_KEY=...
 
+8. Create S3 bucket.
+Make sure to create bucket policy as public and enable versioning !
 
+9. Type on SSH CLI :
+export NAME=fleetman.k8s.local
+export KOPS_STATE_STORE=s3://kops-coelgber
 
+10. Check DC availability 
+aws ec2 describe-availability-zones --region us-east-2
+kops create cluster --zones us-east-2a,us-east-2b,us-east-2c ${NAME}
+
+11. SSH Keygen
+ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa
+kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
+
+# Editor (Skip it !) :
+kops edit cluster ${NAME}
+export EDITOR=nano
+export EDITOR=vim
 
