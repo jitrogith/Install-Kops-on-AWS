@@ -1,0 +1,33 @@
+1. Install EC2 Instance with Ubuntu !
+
+2. Login to EC2 Instance with SSH !
+
+3. Install Kops !
+curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+chmod +x ./kops
+sudo mv ./kops /usr/local/bin/
+
+4. Install Kubectl !
+curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+5. Create User & Group for Kops with :
+- EC2FullAccess
+- Route53FullAccess
+- S3FullAccess
+- IAMFullAccess
+- VPCFullAccess
+
+Save Access Key & Secret Access Key !
+
+6. Configure AWS on SSH CLI :
+aws configure
+
+7. Type these Access Key & Secret Key :
+export AWS_ACCESS_KEY_ID=...
+export AWS_SECRET_ACCESS_KEY=...
+
+
+
+
